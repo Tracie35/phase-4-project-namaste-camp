@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
-    wrap_parameters format: []
-    skip_before_action :authorized, only: [:create]
-rescue_from ActiveRecord: :RecordInvalid, with: :render_unprocessable_entity
+    # wrap_parameters format: []
+    skip_before_action :authorized
+# rescue_from ActiveRecord: :RecordInvalid, with: :render_unprocessable_entity
 
+
+def index
+  users = User.all 
+  render json: users
+end
 #sign in
 def show
     current_user = User.find(session[user_id])
@@ -10,34 +15,29 @@ def show
 end
 
 def create
-    user = User.create!(user_params)
-    render json: user
+  user = User.create(user_params)
+  if user.valid?
+    render json: user, status: :created
+  else
+    render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+  end
 end
+# def create
+#     user = User.create!(user_params)
+#     render json: user
+# end
+
 
 private 
 #error handling
-def render_unprocessable_entity(invalid)
-    render json:{error:invalid.record.errors}, status: :render_unprocessable_entity
-end
+# def render_unprocessable_entity(invalid)
+#     render json:{error:invalid.record.errors}, status: :render_unprocessable_entity
+# end
 
 #params
 def user_params
-    params.permit[:name, :password]
+  params.permit(:name, :password, :password_confirmation)
 end
-#signup
-def create
-    user = User.create(user_params)
-    if user.valid?
-      render json: user, status: :created
-    else
-      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
-    end
-  end
 
-  private
-
-  def user_params
-    params.permit(:username, :password, :password_confirmation)
-  end
 
 end

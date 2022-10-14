@@ -1,3 +1,3 @@
 class SessionSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name, :password 
 end

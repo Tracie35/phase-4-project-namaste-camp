@@ -1,7 +1,8 @@
-import React from 'react'
-
-
-
+import React , {  useState }from 'react'
+const [name, setname ]= useState("")
+const [password, setPassword  ]= useState("") 
+const [errors, setErrors ]= useState([]) 
+const Signup = ({setUser})
 function SignUp() {
   function handlesubmit(e){
 
@@ -50,8 +51,8 @@ function SignUp() {
     
                     <form class="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2" onSubmit={handlesubmit}>
                         <div>
-                            <label htmlFor="firstname"class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Name</label>
-                            <input id='firstname' value={name}  onChange={(e)=> setname(e.target.value)}   type="text" placeholder="First Name" class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                            <label htmlFor="name"class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Name</label>
+                            <input id='name' value={name}  onChange={(e)=> setname(e.target.value)}   type="text" placeholder=" Name" class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                         </div>
                         <div>
                             <label  htmlFor="password"class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Password</label>
@@ -76,6 +77,27 @@ function SignUp() {
       )
     }
     export default SignUp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         
     
                        
